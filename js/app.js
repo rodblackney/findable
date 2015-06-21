@@ -11,27 +11,26 @@ $(function () {
     });
 });
 
+function gotData(data) {}
+
 function search(query) {
-    var apiKey = 'AIzaSyDgN9qwEHmxUGkpZVeegH0rvoHNT0a_rsc';
-    $.getJSON('https://www.googleapis.com/youtube/v3/search?part=snippet&key=' + apiKey + '&q=' + query, function (data) {
-        $('#results li').remove(); // Clear existing search results
-        if (data.items && data.items.length > 0) {
-            console.log(data);
-            showResults(data.items);
-        } else {
-            $('#error').text('No results');
+    var clientId = '62566400d0b546feb90dd52ac7984a33';
+
+    $.ajax({
+        url: 'https://api.instagram.com/v1/tags/architecture/media/recent?client_id=' + clientId,
+        jsonp: "callback",
+        dataType: "jsonp",
+        success: function( response ) {
+          showResults(response.data);
         }
     });
 }
 
 function showResults(results){
   $.each(results, function(index,value){
-    var videoUrl = 'https://www.youtube.com/watch?v=' + value.id.videoId;
-    var innerHtml = '<a href="' + videoUrl + '">';
-    innerHtml += '<h3 class="title">' + value.snippet.title + '</h3>';
-    innerHtml += '<img src="' + value.snippet.thumbnails.default.url + '" />';
-    innerHtml += '<span class="description">' + value.snippet.description + '</span>';
-    innerHtml += '</a>';
+    console.log();
+    var imageUrl = value.images.thumbnail.url;
+    var innerHtml = '<img src="' + imageUrl + '"/>';
     $('#results').append('<li>' + innerHtml + '</li>');
   });
 }
