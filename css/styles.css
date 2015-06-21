@@ -1,9 +1,15 @@
 body {
 	font-family: verdana;
+    border-top: 10px solid #3f729b;
 }
 
-#results li {
+h6 {
+    color: gray;
+}
+
+#results li ol {
 	margin-bottom: 1em;
+    list-style-type: none;
 }
 
 #results a {
@@ -30,3 +36,5 @@ body {
 #error {
 	color: red;
 }
+
+
